@@ -1,0 +1,42 @@
+# Rencana Implementasi Dashboard KPI
+
+Tujuan dari rencana ini adalah untuk mengubah *output* skrip yang tadinya hanya berupa teks hitam-putih di terminal (*command prompt*) menjadi sebuah **Dashboard Web Interaktif** yang cantik dan visual.
+
+## Elemen yang Harus Ditambahkan
+
+Untuk menyulap skrip Python menjadi *dashboard*, elemen (pustaka) terbaik dan paling populer yang harus kita tambahkan adalah **Streamlit**.
+
+Dengan Streamlit, fungsi-fungsi `print()` akan kita ganti menjadi elemen visual, contohnya:
+- `st.title()` untuk judul dashboard.
+- `st.metric()` untuk menampilkan "TOTAL NILAI" dengan angka besar yang mencolok.
+- `st.dataframe()` untuk menampilkan tabel data KPI yang rapi dan bisa diurutkan (*sortable*).
+- `st.bar_chart()` untuk membuat grafik batang agar Anda bisa melihat perbandingan skor masing-masing program secara visual.
+
+## User Review Required
+
+> [!IMPORTANT]
+> Mengubah skrip menjadi *dashboard* Streamlit akan mengubah cara Anda menjalankan aplikasinya. Anda tidak lagi melihat teks di terminal, melainkan akan terbuka sebuah halaman web (bekerja secara *offline* di browser Anda).
+
+**Kelebihan Streamlit:**
+- Sangat modern dan cantik.
+- Mendukung visualisasi grafik.
+- Tetap bisa menarik data dari Google Sheets.
+
+## Open Questions
+
+> [!WARNING]
+> 1. Apakah Anda ingin saya **langsung membuatkan kode dashboard-nya** sekarang menggunakan Streamlit?
+> 2. Jika iya, apakah Anda ingin saya mengganti file `System KPI.py` yang sudah ada, atau Anda ingin saya membuat file baru (misalnya `Dashboard_KPI.py`) agar file skrip dasar Anda tetap aman?
+
+## Proposed Changes
+
+### [NEW] `Dashboard_KPI.py`
+- Membuat file baru khusus untuk *dashboard*.
+- Menggunakan `import streamlit as st`.
+- Menggunakan `pandas` untuk menarik data dari Google Sheets.
+- Membuat desain antarmuka (*User Interface*) dengan pembagian kolom (*columns*) dan grafik (*charts*).
+
+## Verification Plan
+- Menginstal pustaka Streamlit (`pip install streamlit`).
+- Menjalankan perintah `streamlit run Dashboard_KPI.py`.
+- Memastikan halaman web lokal (`http://localhost:8501`) terbuka dan menampilkan tabel serta metrik KPI.

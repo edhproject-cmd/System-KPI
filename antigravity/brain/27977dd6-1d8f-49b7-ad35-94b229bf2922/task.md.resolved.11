@@ -1,0 +1,8 @@
+# Task Transformasi Dashboard KPI (Tingkat Individu)
+
+- [x] Mendapatkan persetujuan dari pengguna untuk mengubah format Google Sheets.
+- [x] Menulis ulang file `c:\Users\USer\Dashboard_KPI.py`.
+- [x] Menambahkan logika `selectbox` untuk menyaring data berdasarkan "Nama Pengurus".
+- [x] Membuat fitur papan peringkat (*Leaderboard*) untuk menampilkan total skor seluruh pengurus.
+- [x] Mempertahankan *embed Iframe* Google Sheets.
+- [x] Menyediakan *Walkthrough* baru untuk format kolom yang baru.

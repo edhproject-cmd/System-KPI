@@ -1,0 +1,41 @@
+# Rencana Peningkatan Visual: Tema Premium & Logo
+
+Saat ini *Dashboard* Anda sudah memiliki fungsi dan logika kalkulasi yang sempurna. Sekarang saatnya kita memberikan **Aestetika Visual** (*User Interface/UI*) yang memukau agar aplikasi ini tidak terlihat kaku dan terlihat seperti *Web App* kelas atas!
+
+## Konsep Desain (*Premium Aesthetics*)
+Saya akan menerapkan pendekatan desain web modern (*Glassmorphism* dan *Gradients*). Berikut adalah elemen visual yang akan kita ubah:
+
+1. **Logo Organisasi**: Saya akan menambahkan area khusus di bagian paling atas *dashboard* untuk menampilkan logo organisasi/departemen Anda. (Sementara saya akan membuatkan *dummy logo* cantik yang nantinya bisa Anda ganti sendiri dengan mudah).
+2. **Kustomisasi Tema Dasar**: Saya akan mengubah konfigurasi bawaan Streamlit (warna latar, warna tombol, dan jenis *font* modern) agar terlihat lebih elegan.
+3. **Kartu Metrik Berwarna**: Angka "Total Nilai Rapor" tidak lagi sekadar teks hitam-putih. Saya akan menyuntikkan kode CSS khusus agar kotak angka tersebut memiliki warna latar bergradasi, sudut yang melengkung (*rounded*), dan efek bayangan (*shadow*).
+4. **Bilah Samping (*Sidebar*)**: Saya akan memindahkan menu filter/pilihan nama pengurus ke panel sebelah kiri layar (*Sidebar*). Hal ini membuat area tabel dan grafik di tengah menjadi lebih luas dan bersih, layaknya *dashboard* profesional sejati.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Tentang Kustomisasi Warna Tema**
+> Saya berencana membuatkan tema bernuansa **Elegan/Premium** (misalnya perpaduan aksen Biru Laut atau warna yang profesional). Jika Anda memiliki warna khas atau "Warna Kebanggaan" organisasi Anda (misalnya Merah-Emas, Hijau-Kuning, dsb), mohon beritahu saya agar saya bisa menyesuaikan kode warna (*hex code*)-nya.
+
+## Open Questions
+
+> [!WARNING]
+> Sebelum saya menyuntikkan berbagai efek visual dan CSS ke dalam *dashboard*, mohon konfirmasi:
+> 1. Apakah Anda setuju dengan ide desain tersebut (Logo di atas, Filter di kiri, dan Kartu Metrik berwarna di tengah)?
+> 2. **Warna tema apa** yang Anda inginkan? (Jika tidak ada spesifikasi, saya akan menggunakan tema *Premium Modern* pilihan saya).
+
+## Proposed Changes
+
+### [NEW] `logo_dummy.png`
+- Menggunakan kemampuan AI pencipta gambar saya untuk membuat satu logo tiruan bernuansa organisasi kepemudaan/aparatur sebagai *placeholder*.
+
+### [NEW] `.streamlit/config.toml`
+- Membuat konfigurasi sistem untuk memaksa penggunaan tema warna, kustom *font* (contoh: *sans-serif* modern), dan warna tombol kustom.
+
+### [MODIFY] `c:\Users\USer\Dashboard_KPI.py`
+- Menyuntikkan blok `st.markdown('<style>...</style>', unsafe_allow_html=True)` yang berisi ratusan baris kode CSS untuk mempercantik elemen-elemen bawaan.
+- Menambahkan `st.image("logo_dummy.png")`.
+- Memindahkan `st.selectbox` ke `st.sidebar`.
+
+## Verification Plan
+- Menjalankan kembali *dashboard*.
+- Memastikan visualnya membuat Anda berteriak "Wow!" saat pertama kali melihat perubahannya.

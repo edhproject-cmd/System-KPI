@@ -1,0 +1,42 @@
+# Rencana Pembuatan Sistem CMS (Halaman Pengaturan)
+
+Permintaan Anda ini akan merombak aplikasi kita dari sekadar "Dashboard" menjadi sebuah **Aplikasi Penuh (CMS - Content Management System)**! Ini adalah lompatan besar yang sangat fantastis.
+
+Untuk mewujudkannya, saya berencana membagi layar aplikasi menjadi **2 Halaman Terpisah** (bisa diakses melalui tombol di *Sidebar*):
+1. 📊 **Halaman Utama**: Berisi papan peringkat, grafik, dan laporan persis seperti yang ada sekarang.
+2. ⚙️ **Halaman Pengaturan**: Sebuah panel khusus *Admin* untuk mengubah segala hal tentang dasbor.
+
+## Detail Fitur Halaman Pengaturan (Admin)
+Di halaman ini, saya akan menambahkan formulir interaktif untuk:
+- **Ubah Judul**: Kolom teks untuk mengganti teks "Sistem Evaluasi Aparatur".
+- **Ganti Logo**: Tombol unggah (*upload file*) agar Anda bisa memasukkan gambar logo asli Anda dari dalam komputer, dan logo di dasbor akan langsung berganti!
+- **Ubah Tema Warna**: Sebuah menu *dropdown* untuk memilih palet warna (Misalnya: Biru Elegan, Hijau Zamrud, Merah Gelap, atau Mode Gelap/Dark Mode).
+
+## User Review Required
+
+> [!CAUTION]
+> **Dilema Fitur "Input & Hapus Data"**
+> Anda juga meminta fitur untuk "menginput, menambah/menghapus pengurus, dan skor KPI" langsung dari menu Pengaturan ini. 
+> 
+> Sebelumnya, kita menggunakan trik **"Jendela Google Sheets" (Iframe)** karena Anda ingin datanya tersimpan di Google Drive tanpa membuat pengamanan Google Cloud. Jika saya membuatkan **formulir input data asli buatan saya (bukan milik Google Sheets)**, sistem saya **TIDAK BISA** menyimpan data tersebut kembali ke Google Drive Anda (karena Google memblokir akses penyimpanan otomatis dari pihak luar).
+
+### 💡 Solusi yang Saya Tawarkan:
+Untuk mengabulkan permintaan Anda secara utuh, kita harus **Pindah ke Penyimpanan Lokal (Local Database CSV)**. 
+- **Artinya**: Saya akan menghapus *Iframe Google Sheets* di bawah dasbor. Sebagai gantinya, saya akan membuatkan tabel interaktif (*Live Data Editor*) super keren di menu Pengaturan. Semua data yang Anda ketik dan hapus di sana akan disimpan ke dalam sebuah file `database_kpi.csv` secara permanen di dalam folder komputer Anda sendiri (Bukan di Google Drive lagi).
+
+## Open Questions
+
+> [!WARNING]
+> Sebelum saya memprogram fitur raksasa ini, mohon keputusan Anda:
+> 1. Apakah Anda setuju untuk melepaskan integrasi Google Sheets (Google Drive) dan beralih menggunakan **Database Lokal di komputer Anda** agar fitur form input/hapus nama pengurus ini bisa berfungsi sempurna?
+> 2. Apakah konsep 2 Halaman (Halaman Utama & Halaman Pengaturan) sudah sesuai dengan bayangan Anda?
+
+## Proposed Changes
+- Membuat file `config.json` untuk menyimpan pengaturan teks judul, path logo, dan warna tema agar tidak hilang saat ditutup.
+- Memodifikasi `Dashboard_KPI.py` menjadi aplikasi berbasis *Tab/Menu Navigation*.
+- Menambahkan komponen `st.file_uploader`, `st.text_input`, dan `st.data_editor` di dalam menu pengaturan.
+
+## Verification Plan
+- Menjalankan *dashboard* dan mencoba pindah ke halaman Pengaturan.
+- Mengganti teks judul dan mengunggah logo baru.
+- Memasukkan nama pengurus baru ke dalam tabel lokal dan mengecek apakah langsung muncul di Halaman Utama.

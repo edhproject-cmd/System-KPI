@@ -1,0 +1,8 @@
+# Task Pembuatan Menu Pengaturan (CMS)
+
+- [x] Mendapatkan persetujuan konsep Hibrida (Menu Pengaturan + Iframe Google Sheets).
+- [x] Membuat file konfigurasi lokal `app_config.json`.
+- [x] Merombak `Dashboard_KPI.py` untuk memiliki dua halaman via *Sidebar Radio*.
+- [x] Membangun halaman "⚙️ Pengaturan Tampilan" (Input Judul, Upload Logo, Pilihan Tema).
+- [x] Menambahkan logika untuk merender tema CSS dinamis berdasarkan pilihan pengguna.
+- [x] Mengupdate *Walkthrough* penutup.

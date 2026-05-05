@@ -1,0 +1,7 @@
+# Task Transformasi Format Mendatar (Wide Format)
+
+- [x] Menyepakati penggunaan bobot tetap (20%) dan 5 KPI standar HRD.
+- [ ] Menulis ulang file `c:\Users\USer\Dashboard_KPI.py`.
+- [ ] Mengubah logika *parsing* Pandas untuk membaca 1 baris sebagai 5 KPI.
+- [ ] Menyesuaikan tabel rincian individu dan *Leaderboard* agar cocok dengan struktur baru.
+- [ ] Mengupdate *Walkthrough* untuk memandu pengguna tentang format 6 kolom yang baru.

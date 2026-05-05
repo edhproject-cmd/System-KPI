@@ -1,0 +1,41 @@
+# Rencana Hibrida: Pengaturan Visual & Google Drive
+
+Pilihan yang sangat bijak! Mempertahankan Google Drive berarti data Anda aman di komputasi awan (*cloud*) dan bisa diakses dari mana saja.
+
+Karena Anda tetap memilih Google Drive, kita akan menggunakan skenario **"Hibrida"**. Artinya, untuk mengubah Judul, Logo, dan Tema, Anda akan menggunakan **formulir asli buatan Dasbor (Pengaturan Visual)**. Sedangkan untuk menginput/menghapus data KPI, kita akan tetap menggunakan **"Jendela Google Sheets" (Iframe)** yang sudah terbukti andal.
+
+## Pembagian Menu Navigasi (*Sidebar*)
+Saya akan memodifikasi *Sidebar* dasbor Anda untuk memiliki menu navigasi (tombol pindah halaman):
+
+### 1. 📊 Dashboard Utama
+- Menampilkan Papan Peringkat, Grafik, dan Tabel Evaluasi.
+- **Di bagian bawah halaman ini, Iframe Google Sheets akan tetap hadir** agar Anda bisa langsung mengetik, menambah, dan menghapus pengurus langsung ke Google Drive Anda.
+
+### 2. ⚙️ Pengaturan Tampilan
+- **Ganti Judul**: Anda bisa mengganti nama aplikasi sesuai keinginan (misalnya: "Dasbor Kinerja Departemen IT").
+- **Ganti Logo**: Anda bisa mengunggah file `.png` atau `.jpg` dari komputer Anda, dan sistem akan langsung mengganti logo lamanya.
+- **Ganti Tema Warna**: Anda bisa memilih warna tema dasar (seperti Biru Elegan, Hijau Segar, atau Hitam Modern).
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Cara Kerja Penyimpanan Pengaturan:**
+> Pilihan judul, logo, dan tema yang Anda ubah di halaman "Pengaturan Tampilan" akan saya simpan ke dalam sebuah file kecil bernama `app_config.json` di dalam komputer Anda. Sehingga, kapan pun Anda membuka ulang dasbornya, pengaturan tema dan judul tersebut tidak akan kembali ke awal (tersimpan permanen).
+
+## Open Questions
+
+> [!WARNING]
+> Rencana ini memberikan Anda **kendali penuh atas tampilan dasbor** sekaligus **mempertahankan penyimpanan Google Drive**. 
+> 
+> Apakah Anda menyetujui rencana hibrida yang luar biasa ini agar saya bisa mulai mengetikkan kodenya?
+
+## Proposed Changes
+- Membuat file `app_config.json` lokal.
+- Mengubah `Dashboard_KPI.py` menjadi aplikasi berbasis *Multi-Page* (Navigasi menu dengan `st.sidebar.radio`).
+- Menambahkan logika untuk menangani *upload file* logo agar gambar tersimpan dengan aman di dalam folder Anda.
+
+## Verification Plan
+- Menjalankan dasbor.
+- Berpindah ke menu Pengaturan Tampilan.
+- Mengganti teks judul dan mengunggah gambar *random* dari komputer.
+- Memastikan judul dan logo di Halaman Utama berubah secara *real-time*.

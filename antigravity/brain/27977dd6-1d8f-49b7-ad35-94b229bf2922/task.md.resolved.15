@@ -1,0 +1,8 @@
+# Task Perombakan UI/UX Premium (Dashboard)
+
+- [x] Mendapatkan persetujuan perombakan visual dari pengguna.
+- [x] Menghasilkan gambar logo tiruan (*placeholder*) menggunakan alat AI.
+- [x] Membuat file konfigurasi tema `.streamlit/config.toml`.
+- [x] Menyuntikkan efek CSS Premium (*Glassmorphism, Gradient*) ke `Dashboard_KPI.py`.
+- [x] Memindahkan area kontrol (Filter Nama) ke panel *Sidebar*.
+- [x] Menyediakan *Walkthrough* penutup.

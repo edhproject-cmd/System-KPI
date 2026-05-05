@@ -1,0 +1,47 @@
+# Rencana Transformasi: KPI Tingkat Individu (Pengurus)
+
+Jika Anda ingin mengukur kinerja **setiap pengurus secara individu** (bukan keseluruhan departemen), maka struktur logika aplikasi kita harus dirombak secara signifikan. Ini adalah perubahan fungsi (*major architectural change*) yang sangat bagus dan sering digunakan di dunia HRD.
+
+## Perubahan Konsep Dasar
+Saat ini, 1 baris di Google Sheets Anda dianggap sebagai 1 Program Departemen.
+Untuk mengukur individu, 1 baris akan mewakili **1 Aspek Penilaian dari 1 Pengurus**.
+
+Struktur kolom Google Sheets Anda harus **ditambah 1 kolom di awal**, sehingga urutannya menjadi:
+1. `Nama Pengurus` *(Kolom Baru)*
+2. `Aspek Penilaian (KPI)`
+3. `Bobot (%)`
+4. `Target`
+5. `Realisasi`
+6. `Skor (1-5)`
+
+*Contoh isi datanya nanti:*
+- **Budi** | Kehadiran Rapat | 30% | Hadir 100% | Hadir 80% | 4
+- **Budi** | Kualitas Proker | 70% | Sukses | Telat | 2
+- **Siti** | Kehadiran Rapat | 30% | Hadir 100% | Hadir 100% | 5
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Dampak pada Google Sheets Anda:**
+> Jika Anda menyetujui rencana ini, Anda **DIWAJIBKAN** untuk merombak ulang format tabel di Google Sheets Anda agar sesuai dengan struktur 6 kolom di atas (menambahkan "Nama Pengurus" di Kolom A). Jika Anda tidak merombaknya, skrip baru nanti akan mengalami *error*.
+
+## Proposed Changes
+
+### [MODIFY] `c:\Users\USer\Dashboard_KPI.py`
+Saya akan memodifikasi kode *dashboard* Anda dengan fitur-fitur baru berikut:
+1. **Sistem Filter (Dropdown)**: Saya akan menambahkan menu *Dropdown* (Pilihan) di bagian atas *dashboard*. Anda bisa memilih nama pengurus (misal: "Budi").
+2. **Kalkulasi Spesifik**: Saat Anda memilih "Budi", semua metrik, Total Nilai, Tabel, dan Grafik di bawahnya akan langsung berubah dan **hanya menghitung skor miliki Budi**.
+3. **Papan Peringkat (Leaderboard)**: Saya juga akan menambahkan satu tabel khusus yang merangkum *Total Skor Akhir* dari SEMUA pengurus sekaligus, agar Anda bisa melihat siapa pengurus terbaik (*Top Performer*) bulan ini.
+4. **Mempertahankan Live Editor**: "Jendela ajaib" Iframe Google Sheets di bagian bawah akan tetap saya pertahankan, karena itu sangat memudahkan Anda.
+
+## Open Questions
+
+> [!WARNING]
+> 1. Apakah Anda siap merombak ulang format tabel Google Sheets Anda dengan menambahkan kolom "Nama Pengurus" di kolom paling awal (Kolom A)?
+> 2. Apakah Anda setuju dengan desain fitur *Dropdown* dan *Leaderboard* di atas? 
+
+## Verification Plan
+- Mengubah skrip `Dashboard_KPI.py` untuk mengakomodasi kolom ke-6.
+- Menjalankan `streamlit run Dashboard_KPI.py`.
+- Memastikan menu *dropdown* muncul dan bisa menyaring data KPI berdasarkan nama pengurus dengan akurat.
+- Memastikan papan peringkat *(leaderboard)* mengalkulasi semua total nilai dengan benar.

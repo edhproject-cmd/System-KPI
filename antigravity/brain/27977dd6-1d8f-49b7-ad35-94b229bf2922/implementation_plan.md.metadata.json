@@ -1,0 +1,7 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary":  "Rencana migrasi file proyek ke dalam folder khusus dan menghubungkannya dengan repository GitHub (git push).",
+  "updatedAt":  "2026-05-05T07:22:29.495144800Z",
+  "version":  "10",
+  "requestFeedback":  true
+}
