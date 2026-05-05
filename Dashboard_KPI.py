@@ -153,6 +153,8 @@ def render_dashboard(config, df_raw, c_main, time_filter):
     start_date = None
     if time_filter == "1 Minggu Terakhir":
         start_date = today - datetime.timedelta(days=7)
+    elif time_filter == "2 Minggu Terakhir":
+        start_date = today - datetime.timedelta(days=14)
     elif time_filter == "1 Bulan Terakhir":
         start_date = (pd.to_datetime(today) - pd.DateOffset(months=1)).date()
     elif time_filter == "3 Bulan Terakhir":
@@ -243,7 +245,7 @@ def render_individual_view(df_clean, selected_pengurus, c_main):
 def render_iframe_editor():
     st.markdown("---")
     st.markdown("### 📝 Live Data Editor (Input & Hapus Data)")
-    st.warning("⚠️ **WAJIB**: Pastikan Kolom A adalah **Tanggal** (M/D/YYYY) dan Kolom B adalah **Nama Pengurus**! Tambahkan evaluasi baru di baris bawah, jangan menghapus baris lama agar sejarah tetap tersimpan.")
+    st.warning("⚠️ **WAJIB**: Pastikan Kolom A adalah **Tanggal** (M/D/YYYY) dan Kolom B adalah **Nama Pengurus**! Tambahkan evaluasi baru di baris bawah setiap **2 minggu sekali**, jangan menghapus baris lama agar sejarah tetap tersimpan.")
     components.iframe(EMBED_URL, height=450, scrolling=True)
 
 def render_settings(config):
@@ -293,6 +295,7 @@ def main():
             time_filter = st.selectbox("Rentang Waktu:", [
                 "Semua Waktu", 
                 "1 Minggu Terakhir", 
+                "2 Minggu Terakhir",
                 "1 Bulan Terakhir", 
                 "3 Bulan Terakhir", 
                 "6 Bulan Terakhir", 
