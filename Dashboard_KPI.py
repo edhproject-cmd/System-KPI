@@ -209,9 +209,25 @@ def render_global_view(leaderboard, list_pengurus, c_main):
         st.markdown("##### Tabel Klasemen Akhir")
         st.dataframe(leaderboard, use_container_width=True)
     with lb_col2:
-        st.markdown("##### Perbandingan Poin Antar Pengurus")
-        chart_global = leaderboard.set_index("Nama Pengurus")["Nilai Akhir"]
-        st.bar_chart(chart_global, color=c_main)
+        st.markdown("##### 📈 Statistik Distribusi Kinerja")
+        
+        # Kalkulasi Statistik Divisi
+        mean_score = leaderboard['Nilai Akhir'].mean()
+        median_score = leaderboard['Nilai Akhir'].median()
+        max_score = leaderboard['Nilai Akhir'].max()
+        min_score = leaderboard['Nilai Akhir'].min()
+        
+        stat_col1, stat_col2 = st.columns(2)
+        with stat_col1:
+            st.info(f"**Rata-rata (Mean):** {mean_score:.2f}")
+            st.info(f"**Nilai Tengah (Median):** {median_score:.2f}")
+        with stat_col2:
+            st.success(f"**Skor Tertinggi:** {max_score:.2f}")
+            st.error(f"**Skor Terendah:** {min_score:.2f}")
+            
+        st.markdown("##### 📊 Tren Statistik")
+        # Menggunakan Area Chart sebagai representasi tren statistik (bukan sekadar batang)
+        st.area_chart(leaderboard.set_index("Nama Pengurus")["Nilai Akhir"], color=c_main)
 
 def render_individual_view(df_clean, selected_pengurus, c_main):
     """Menampilkan rapor kinerja individu spesifik."""
@@ -238,9 +254,25 @@ def render_individual_view(df_clean, selected_pengurus, c_main):
         st.markdown("##### Rincian 5 Indikator HRD")
         st.dataframe(df_filtered.drop(columns=["Nama Pengurus"]), use_container_width=True, hide_index=True)
     with viz_col2:
-        st.markdown("##### Analisis Kekuatan & Kelemahan")
-        chart_individu = df_filtered.set_index("Indikator (KPI)")["Skor (1-5)"]
-        st.bar_chart(chart_individu, color=c_main)
+        st.markdown("##### 🎯 Analisis Statistik Individu")
+        
+        # Kalkulasi Kekuatan & Kelemahan
+        idx_max = df_filtered["Skor (1-5)"].idxmax()
+        idx_min = df_filtered["Skor (1-5)"].idxmin()
+        
+        kekuatan = df_filtered.loc[idx_max, "Indikator (KPI)"]
+        kelemahan = df_filtered.loc[idx_min, "Indikator (KPI)"]
+        
+        # Menghitung Standar Deviasi (Konsistensi)
+        std_dev = df_filtered["Skor (1-5)"].std()
+        konsistensi = "Sangat Konsisten" if std_dev < 1.0 else "Kurang Konsisten"
+        
+        st.success(f"**⭐ Kekuatan Utama:** {kekuatan} (Skor: {df_filtered.loc[idx_max, 'Skor (1-5)']})")
+        st.warning(f"**⚠️ Area Perbaikan:** {kelemahan} (Skor: {df_filtered.loc[idx_min, 'Skor (1-5)']})")
+        st.info(f"**📊 Tingkat Konsistensi:** {konsistensi} (Standar Deviasi: {std_dev:.2f})")
+        
+        # Menampilkan line chart sebagai profil distribusi statistik
+        st.line_chart(df_filtered.set_index("Indikator (KPI)")["Skor (1-5)"], color=c_main)
 
 def render_iframe_editor():
     """Menampilkan jendela editor Google Sheets di bagian bawah."""
