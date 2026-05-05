@@ -1,0 +1,28 @@
+# 🎉 Selamat Datang di Sistem CMS Dasbor Anda!
+
+Kini aplikasi Anda memiliki kontrol penuh atas penampilannya melalui Halaman Pengaturan (*Admin Panel*), namun tetap terhubung langsung dengan Google Drive untuk urusan penyimpanan data. 
+
+## 🧭 Cara Navigasi (Sistem 2 Halaman)
+Coba perhatikan menu samping kiri (*Sidebar*) Anda. Di bagian **Navigasi Sistem**, kini terdapat pilihan (tombol radio) untuk berpindah antara dua halaman:
+1. **📊 Dashboard Utama**
+2. **⚙️ Pengaturan Tampilan**
+
+---
+
+## 🎨 Halaman Pengaturan Tampilan (CMS)
+Pilih halaman **⚙️ Pengaturan Tampilan**. Di halaman ini, Anda memiliki 3 kekuatan admin:
+- **Ganti Judul Aplikasi**: Ketikkan nama departemen atau nama perusahaan Anda di dalam kolom teks.
+- **Ganti Tema Warna**: Pilih salah satu dari warna palet elegan yang tersedia (Biru Elegan, Hijau Segar, Merah Berani, atau Gelap Modern). Sistem akan menyuntikkan kode warna CSS baru ke seluruh elemen secara dinamis!
+- **Ganti Logo Organisasi**: Tersedia tombol `Browse files` untuk mengunggah file JPG/PNG dari dalam komputer Anda.
+
+Setelah selesai, klik tombol **"💾 SIMPAN PENGATURAN"**. Pengaturan Anda akan disimpan ke dalam sebuah file lokal bernama `app_config.json`, sehingga tidak akan hilang saat komputer dimatikan.
+
+---
+
+## 📝 Halaman Dashboard Utama (Input Data)
+Jika Anda ingin menambah/menghapus nama pengurus atau mengubah skor KPI, silakan kembali ke halaman **📊 Dashboard Utama**.
+- Gulir ke area paling bawah bernama **"📝 Live Data Editor"**.
+- Karena kita masih menggunakan sistem Hibrida (menyambungkan Google Drive), Anda bisa langsung mengedit sel tabel selayaknya Anda membuka Microsoft Excel atau Google Sheets. Data akan *auto-save* secara *online*.
+- Setelah selesai mengetik/menghapus baris, pastikan mengeklik tombol merah **"🔄 Perbarui Data Sekarang"** di panel menu kiri agar grafik dasbor segera menyesuaikan!
+
+Silakan jalankan ulang aplikasi dengan perintah `python -m streamlit run "c:\Users\USer\Dashboard_KPI.py"` untuk mencoba panel kontrol baru Anda.

@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_TASK",
+  "summary":  "Daftar tugas pemindahan folder proyek dan pengunggahan (git push) ke GitHub.",
+  "updatedAt":  "2026-05-05T07:29:25.261531200Z",
+  "version":  "18"
+}

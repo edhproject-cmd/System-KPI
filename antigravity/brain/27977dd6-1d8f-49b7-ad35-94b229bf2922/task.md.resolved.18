@@ -1,0 +1,9 @@
+# Task Migrasi & Integrasi GitHub
+
+- [x] Mendapatkan persetujuan strategi migrasi *folder* dari pengguna.
+- [ ] Membuat folder proyek `C:\Users\USer\System-KPI`.
+- [ ] Menyalin skrip utama, konfigurasi (`.streamlit`, `app_config.json`), dan logo ke dalam folder tersebut.
+- [ ] Membuat file `requirements.txt`.
+- [ ] Menginisialisasi Git, *commit*, dan menautkannya ke repositori *remote*.
+- [ ] Melakukan `git push` ke GitHub.
+- [ ] Membuat panduan penutup (*Walkthrough*).

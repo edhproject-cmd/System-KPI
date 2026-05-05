@@ -1,0 +1,49 @@
+# Rencana Penyederhanaan Input: 1 Baris = 1 Pengurus (5 KPI)
+
+Saya paham maksud Anda! Anda tidak ingin repot mengetik nama "Budi" berulang-ulang sampai 5 kali ke bawah. Anda ingin format yang menyamping (*Wide Format*), di mana **1 Baris murni milik 1 Orang**.
+
+Ini adalah pendekatan yang sangat elegan dan jauh lebih menghemat waktu Anda saat menginput data.
+
+## Konsep Kolom Google Sheets Baru
+Untuk mewujudkan ini, kita harus mengubah desain Google Sheets Anda menjadi **format kolom kesamping**. 
+
+Di baris pertama (judul kolom), Anda akan menuliskan 5 Nama KPI yang menjadi standar departemen Anda, misalnya:
+1. `Nama Pengurus`
+2. `KPI 1 (Hadir Rapat)`
+3. `KPI 2 (Kualitas Kerja)`
+4. `KPI 3 (Inisiatif)`
+5. `KPI 4 (Komunikasi)`
+6. `KPI 5 (Kedisiplinan)`
+
+Sehingga saat menginput, Anda cukup menulis:
+**Budi** | **5** | **4** | **3** | **5** | **4**
+
+*Hanya dengan angka skor 1-5 saja di tiap kolom KPI-nya.*
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Tentang Bobot (%):**
+> Karena formatnya disederhanakan, cara paling bersih adalah **menanamkan Bobot (%) di dalam skrip Python**, bukan lagi diketik di Google Sheets. 
+> 
+> Karena ada 5 KPI, cara paling adil adalah membagi rata bobotnya, yaitu **Masing-masing KPI berbobot 20%** (sehingga total 5 KPI = 100%).
+
+## Open Questions
+
+> [!WARNING]
+> Sebelum saya memprogram ulang *Dashboard* Anda ke format yang super praktis ini, mohon konfirmasi:
+> 1. Apakah Anda setuju dengan desain kolom menyamping ini dan bobot rata 20% per KPI?
+> 2. Apakah Anda punya **5 Nama KPI spesifik** yang ingin Anda jadikan standar untuk judul kolomnya? (Atau boleh saya gunakan contoh standar HRD seperti: *Kehadiran, Kualitas Kerja, Inisiatif, Komunikasi, Kedisiplinan*?)
+
+## Proposed Changes
+
+### [MODIFY] `c:\Users\USer\Dashboard_KPI.py`
+- Mengubah logika *parsing* Pandas dari format menurun (*long*) menjadi mendatar (*wide*).
+- Menjadikan kolom ke-2 hingga ke-6 sebagai indikator KPI otomatis berdasarkan judul kolom (*header*).
+- Menghitung Nilai Akhir dengan mengalikan skor input dengan bobot tetap 0.20 (20%).
+- Menyesuaikan *Leaderboard* dan *Dropdown* agar membaca struktur baru ini dengan mulus.
+
+## Verification Plan
+- Mengubah kode `Dashboard_KPI.py`.
+- Meminta Anda mengedit kolom Google Sheets Anda melalui *Iframe*.
+- Memastikan 1 baris input (5 angka skor) langsung dikonversi menjadi grafik 5 batang di dasbor.

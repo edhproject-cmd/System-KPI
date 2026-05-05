@@ -1,0 +1,33 @@
+# 🎉 Fitur Baru: Format Mendatar yang Super Praktis
+
+Aplikasi telah berhasil disesuaikan! Kini Anda hanya perlu menginput **1 Baris untuk 1 Orang** guna mengalkulasi 5 Aspek Penilaian Standar HRD sekaligus.
+
+Ini adalah 5 KPI Standar HRD yang kini tertanam di dalam sistem (masing-masing berbobot sama rata 20%):
+1. **Kehadiran & Kedisiplinan**
+2. **Kualitas & Hasil Kerja**
+3. **Komunikasi & Kerjasama**
+4. **Inisiatif & Kreativitas**
+5. **Tanggung Jawab & Waktu**
+
+---
+
+## Langkah Wajib (Ubah Format Google Sheets)
+Silakan buka fitur *Live Editor* di bagian bawah *dashboard*, dan ubah baris pertama (judul kolom) Google Sheets Anda agar **persis memiliki 6 kolom** seperti format berikut ini:
+
+| Nama Pengurus | Kehadiran | Kualitas Kerja | Komunikasi | Inisiatif | Tanggung Jawab |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Budi Santoso** | 5 | 4 | 3 | 5 | 4 |
+| **Siti Aminah** | 4 | 5 | 5 | 4 | 5 |
+| **Bagas** | 3 | 3 | 4 | 2 | 3 |
+
+*(Anda bebas menyingkat nama judul kolom di Google Sheets, karena sistem Python kini membaca berdasarkan "urutan kolom", bukan "nama kolom" lagi).*
+
+---
+
+## 🚀 Cara Penggunaan Harian
+1. Setiap kali Anda ingin menilai performa bulanan/kuartalan pengurus, Anda cukup mengetikkan angkanya (skor 1 sampai 5) di Google Sheets yang ada di bawah *dashboard*.
+2. Tekan tombol **"🔄 Perbarui Kalkulasi"** di kanan atas.
+3. Seluruh grafik, peringkat (*Leaderboard*), dan rata-rata metrik di dasbor akan langsung diperbarui saat itu juga! 
+4. Di bagian filter, Anda kini juga bisa melihat tambahan metrik **Rata-rata Skor** dan **Jumlah Aspek Sempurna (Skor 5)** untuk tiap individu.
+
+Silakan jalankan ulang perintah `python -m streamlit run "c:\Users\USer\Dashboard_KPI.py"` di terminal jika aplikasinya sempat tertutup. Selamat mencoba!

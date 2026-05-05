@@ -1,0 +1,30 @@
+# Revisi Integrasi Spreadsheet (Menggunakan Gmail Pribadi)
+
+Anda mengembalikan (*undo*) kode sebelumnya karena mengalami masalah atau kebingungan terkait pembuatan *Service Account* di Google Cloud Console. Anda juga bertanya, **"Jika pakai penyimpanan Gmail pribadi apakah bisa?"**
+
+Jawabannya: **Sangat bisa!**
+
+Pendekatan *Service Account* memang sering kali merepotkan karena dirancang untuk sistem server (seperti robot). Jika Anda ingin menggunakan akun Gmail pribadi Anda, ada **dua alternatif solusi** yang jauh lebih sesuai dengan kebutuhan Anda.
+
+## User Review Required
+
+> [!IMPORTANT]
+> Silakan pilih salah satu dari dua opsi di bawah ini untuk menyelesaikan masalah Anda:
+
+**Opsi 1: Akses Langsung via Link (Paling Mudah, Tanpa Login)**
+- **Cara Kerja**: Anda membuat Google Sheets di akun pribadi Anda, lalu mengatur pengaturan *Share* menjadi **"Anyone with the link can view"** (Siapa saja yang memiliki tautan dapat melihat).
+- **Implementasi**: Skrip Python akan menarik data langsung dari link tersebut (menggunakan `pandas`), tanpa memerlukan proses *login* atau konfigurasi *Google Cloud*.
+- **Kelebihan**: Bebas ribet. Tidak perlu buat *project* di Google Cloud Console, tidak perlu *credentials.json*.
+- **Kekurangan**: Siapa pun yang memiliki link tersebut secara teori bisa melihat data tersebut (meskipun mereka tidak bisa mengeditnya).
+
+**Opsi 2: Login Langsung dengan Akun Google Anda (OAuth 2.0)**
+- **Cara Kerja**: Saat Anda menjalankan skrip Python, browser Anda akan otomatis terbuka dan memunculkan tombol **"Login with Google"**. Anda tinggal masuk menggunakan akun Gmail pribadi Anda.
+- **Implementasi**: Anda tetap harus membuka Google Cloud Console sekali saja untuk mengunduh `client_secret.json` (bukan Service Account, melainkan OAuth Client ID).
+- **Kelebihan**: Jauh lebih aman karena Google Sheets Anda tetap terkunci (*Private*).
+- **Kekurangan**: Sedikit lebih rumit di awal karena tetap butuh mengunduh file JSON dari Google Cloud.
+
+## Open Questions
+
+> [!WARNING]
+> Manakah yang ingin Anda pilih? 
+> Jika Anda setuju dengan **Opsi 1 (Akses via Link Publik)**, saya bisa langsung mengubah kodenya sekarang juga, dan Anda sama sekali tidak perlu berurusan dengan Google Cloud Console!

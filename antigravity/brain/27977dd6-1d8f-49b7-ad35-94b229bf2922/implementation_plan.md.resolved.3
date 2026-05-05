@@ -1,0 +1,35 @@
+# Rencana Penambahan Fitur Input Data (Dashboard)
+
+Anda ingin bisa langsung mengetikkan/mengisi data KPI dari dalam *dashboard* tanpa perlu bolak-balik membuka Google Sheets. Ini adalah fitur yang sangat bagus, namun ada satu hal penting yang perlu disesuaikan.
+
+## User Review Required
+
+> [!WARNING]
+> **Keterbatasan Metode Saat Ini:**
+> Sebelumnya Anda memilih **Opsi 1 (Akses via Link Publik)** untuk menghindari kerumitan pembuatan *Service Account* di Google Cloud. Perlu diketahui bahwa metode link publik bersifat **Read-Only (Hanya Baca)**. Secara sistem, Python tidak diizinkan untuk menulis (*save*) data kembali ke Google Sheets milik Anda tanpa adanya autentikasi keamanan tingkat lanjut.
+
+Oleh karena itu, agar Anda bisa menginput data langsung di *dashboard* secara praktis tanpa harus berurusan dengan Google Cloud, saya mengusulkan **Opsi Transisi ke Penyimpanan Lokal (Local CSV)**.
+
+### Konsep Solusi (Penyimpanan Lokal + Editor Dashboard)
+1. **Berhenti Menggunakan Google Sheets**: Kita tidak akan lagi menarik data dari internet.
+2. **Membuat Database Lokal**: Saya akan membuatkan satu file kecil bernama `data_kpi.csv` di komputer Anda yang berfungsi sebagai "otak" penyimpan data.
+3. **Mengaktifkan Fitur `st.data_editor`**: Di dalam *dashboard* Streamlit Anda, tabel yang tadinya kaku akan berubah menjadi seperti Excel/Google Sheets mini. Anda bisa langsung mengklik barisnya, mengetik data baru, dan sistem akan langsung menyimpan perubahan tersebut ke dalam file lokal Anda secara permanen!
+
+## Open Questions
+
+> [!IMPORTANT]
+> Apakah Anda setuju untuk melepaskan Google Sheets dan beralih menggunakan **Database Lokal (Local CSV)** agar fitur "Input Data Langsung di Dashboard" ini bisa diwujudkan dengan gampang dan aman?
+
+## Proposed Changes
+
+### [MODIFY] `c:\Users\USer\Dashboard_KPI.py`
+- Menghapus variabel `SHEET_ID` dan `URL` Google Sheets.
+- Mengubah fungsi pembacaan data agar membaca file `data_kpi.csv` lokal.
+- Mengganti `st.dataframe()` menjadi `st.data_editor(num_rows="dynamic")` agar pengguna bisa menambah baris baru langsung di halaman web.
+- Menambahkan logika *auto-save* setiap kali ada perubahan pada tabel di *dashboard*.
+
+## Verification Plan
+- Menjalankan ulang *dashboard*.
+- Mengetikkan data baru langsung di dalam tabel pada halaman web.
+- Memastikan grafik dan total skor langsung berubah detik itu juga.
+- Memastikan data tidak hilang (*tersimpan di file lokal*) ketika *browser* di-*refresh*.

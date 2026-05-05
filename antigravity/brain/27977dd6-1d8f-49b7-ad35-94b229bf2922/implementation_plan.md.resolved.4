@@ -1,0 +1,39 @@
+# Rencana Input Data via Google Sheets (Tanpa Google Cloud)
+
+Anda menginginkan data tetap tersimpan di Google Drive / Google Sheets pribadi Anda, namun Anda juga ingin bisa mengisinya langsung dari dalam *dashboard* tanpa harus repot-repot membuka tab Google Sheets secara terpisah. Di saat yang sama, kita harus menghindari kerumitan pembuatan sistem keamanan *Google Cloud*.
+
+Ternyata ada satu trik (*hack*) brilian untuk melakukan ini!
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Solusinya: Metode Penanaman (Embed Iframe)**
+>
+> Kita tidak akan memaksa Python untuk "mengirim" data ke Google. Sebaliknya, kita akan **membawa keseluruhan antarmuka Google Sheets tersebut langsung ke dalam *dashboard* Anda!**
+>
+> Saya akan membuat sebuah "jendela ajaib" di halaman bawah *dashboard* Anda yang isinya adalah Google Sheets Anda sendiri. Karena *browser* komputer Anda sudah *login* dengan akun Gmail pribadi Anda, jendela Google Sheets di dalam *dashboard* ini akan otomatis mengizinkan Anda mengetik dan mengedit data layaknya Anda membuka Google Sheets secara normal.
+
+**Bagaimana Alurnya Nanti?**
+1. Anda membuka *Dashboard*.
+2. Anda melihat grafik dan metrik.
+3. Anda *scroll* ke bawah, lalu langsung mengetikkan/mengedit data KPI di kolom Google Sheets yang tertanam di halaman tersebut.
+4. Data otomatis tersimpan (karena itu adalah Google Sheets asli).
+5. Anda menekan tombol **"🔄 Perbarui Dashboard"** di bagian atas, dan grafik serta kalkulasi nilainya akan langsung menyesuaikan dengan data yang baru Anda ketik!
+
+## Open Questions
+
+> [!WARNING]
+> Trik ini memungkinkan Anda menginput data di *dashboard* yang datanya tersimpan langsung di Google Drive pribadi Anda, dan bagian terbaiknya: **Nol konfigurasi sistem keamanan!** 
+> 
+> Apakah Anda setuju dengan trik brilian ini agar saya bisa langsung mengimplementasikannya di file `Dashboard_KPI.py` Anda?
+
+## Proposed Changes
+
+### [MODIFY] `c:\Users\USer\Dashboard_KPI.py`
+- Menambahkan tombol `st.button("🔄 Perbarui Kalkulasi")` untuk menarik ulang data secara *real-time*.
+- Menggunakan `st.components.v1.iframe()` untuk menanamkan halaman Google Sheets Anda secara langsung (menggunakan `SHEET_ID` yang sudah Anda berikan) dengan mode `rm=minimal` agar tampilannya bersih tanpa banyak menu.
+
+## Verification Plan
+- Menjalankan perintah `streamlit run Dashboard_KPI.py`.
+- Menggulir (*scroll*) ke bawah untuk melihat apakah jendela interaktif Google Sheets berhasil tertanam.
+- Mengetik data baru di sana, lalu menekan tombol Perbarui, dan memastikan grafik nilainya berubah.

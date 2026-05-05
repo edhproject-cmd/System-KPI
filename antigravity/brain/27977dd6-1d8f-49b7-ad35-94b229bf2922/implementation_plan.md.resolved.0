@@ -1,0 +1,41 @@
+# Integrasi Spreadsheet untuk Sistem KPI
+
+Tujuan dari rencana ini adalah untuk mengintegrasikan skrip perhitungan KPI ke dalam format spreadsheet. Dengan ini, data (seperti nama KPI, bobot, target, skor, serta nilai pre-test dan post-test) bisa diambil langsung dari file spreadsheet alih-alih dimasukkan secara manual (hardcode) ke dalam skrip Python.
+
+## User Review Required
+
+> [!IMPORTANT]
+> Untuk menyambungkan skrip Python dengan "spreadsheet", terdapat dua pendekatan utama. Mohon berikan konfirmasi pendekatan mana yang ingin Anda gunakan:
+
+**Opsi 1: File Excel / CSV Lokal (.xlsx atau .csv)**
+- Menggunakan pustaka `pandas` atau `openpyxl`.
+- Pendekatan ini membaca file Excel yang ada di folder komputer Anda.
+- **Kelebihan**: Sangat mudah diimplementasikan, cepat, tidak butuh koneksi internet, dan tidak butuh *setup* kunci keamanan (API Keys).
+
+**Opsi 2: Google Sheets (Online / Cloud)**
+- Menggunakan pustaka `gspread` dan `oauth2client` / `google-auth`.
+- Pendekatan ini membaca tabel langsung dari Google Sheets di Google Drive.
+- **Kelebihan**: Sangat cocok jika tabel KPI diisi dan dipantau bersama-sama oleh pengurus lain secara *real-time*.
+- **Persyaratan**: Memerlukan Anda untuk membuat "Service Account" di Google Cloud Console, mengunduh file `credentials.json`, dan memberikan akses (*Share*) dokumen Google Sheet Anda ke email *Service Account* tersebut.
+
+## Open Questions
+
+> [!WARNING]
+> 1. **Pilihan Anda:** Opsi mana yang lebih Anda butuhkan (Opsi 1: Excel Lokal, atau Opsi 2: Google Sheets)?
+> 2. **Struktur Data:** Apakah Anda sudah memiliki file spreadsheet-nya? Jika belum, saya bisa membuatkan skrip untuk menghasilkan file template-nya terlebih dahulu.
+
+## Proposed Changes
+
+### Integrasi Pembacaan Data
+
+#### [MODIFY] `c:\Users\USer\System KPI.py`
+- Menghapus baris simulasi manual (hardcode) seperti `dept.add_kpi(...)`.
+- Menambahkan *dependency* (seperti `import pandas as pd` atau `import gspread`).
+- Membuat fungsi `load_kpi_from_spreadsheet()` yang akan menarik data baris per baris.
+- Menyuntikkan data tersebut ke dalam class `KPI` dan melakukan kalkulasi.
+
+## Verification Plan
+
+### Manual Verification
+- Jika menggunakan Excel: Saya akan membuatkan file `data_kpi.xlsx` fiktif dan memastikan skrip berjalan tanpa error.
+- Jika menggunakan Google Sheets: Saya akan membimbing Anda membuat kredensial, kemudian menguji apakah skrip berhasil terhubung dan menarik data dari Google Sheets Anda secara online.

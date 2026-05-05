@@ -1,0 +1,30 @@
+# 🎉 Pembaruan: Dashboard KPI dengan Fitur *Live Editor*
+
+Permintaan Anda telah berhasil diimplementasikan! Saya telah memperbarui file `Dashboard_KPI.py` Anda dengan fitur yang sangat canggih.
+
+## Apa Saja yang Berubah?
+1. **Google Sheets Tertanam (*Embedded*)**: Di bagian paling bawah *dashboard*, Anda sekarang akan melihat antarmuka asli Google Sheets Anda.
+2. **Input Langsung**: Anda bisa mengklik sel mana saja di kotak tersebut dan mengetikkan data layaknya Anda sedang berada di situs Google Sheets. Semua ketikan Anda otomatis tersimpan langsung ke Google Drive Anda!
+3. **Tombol "🔄 Perbarui Kalkulasi"**: Saya menambahkan tombol super cepat di bagian kanan atas. Tombol ini berfungsi untuk membersihkan memori dan menghitung ulang semua grafik seketika setelah Anda selesai mengetik di kolom bawah.
+
+---
+
+## 🚀 Cara Menjalankannya
+
+Jika Anda belum membuka *dashboard*-nya, silakan buka terminal dan ketik:
+
+```bash
+python -m streamlit run "c:\Users\USer\Dashboard_KPI.py"
+```
+
+## 💡 Alur Penggunaan (Sangat Praktis)
+
+1. Buka *dashboard* di *browser*.
+2. Gulir (*scroll*) ke area paling bawah bernama **"📝 Input Data (Live Editor)"**.
+3. Ketikkan data baru (misalnya menambah baris program kerja atau mengubah angka skor menjadi `5`).
+4. Gulir kembali ke bagian atas halaman.
+5. Klik tombol **"🔄 Perbarui Kalkulasi"**.
+6. **BAM!** Angka Total Nilai, Tabel, dan Grafik akan langsung melonjak atau berubah seketika menyesuaikan data yang baru Anda ketik!
+
+> [!TIP]
+> Trik Iframe ini membutuhkan koneksi internet (karena mengambil data langsung dari server Google Drive Anda). Pastikan komputer Anda terhubung ke jaringan internet saat menggunakan fitur edit ini.

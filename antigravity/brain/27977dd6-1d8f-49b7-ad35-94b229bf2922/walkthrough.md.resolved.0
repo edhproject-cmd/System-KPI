@@ -1,0 +1,41 @@
+# 🎉 Selesai! Dashboard KPI Aparatur Siap Digunakan
+
+Saya telah berhasil mentransformasi skrip Python Anda menjadi sebuah Dashboard Web Interaktif yang sangat cantik menggunakan **Streamlit**!
+
+Berikut adalah apa saja yang telah saya lakukan:
+1. **Menginstal `streamlit`**: Pustaka ini sekarang sudah siap di komputer Anda.
+2. **Membuat File Baru**: Saya membuatkan file baru bernama `c:\Users\USer\Dashboard_KPI.py`. File lama Anda tetap ada dan tidak diubah.
+3. **Mengintegrasikan Google Sheets**: Dashboard ini sudah dikonfigurasi untuk terhubung dengan ID *Google Sheets* yang Anda berikan sebelumnya.
+
+---
+
+## 🚀 Cara Menjalankan Dashboard
+
+Sekarang Anda bisa melihat hasilnya langsung di *browser* (seperti Google Chrome atau Microsoft Edge). Untuk meluncurkan dashboard, silakan **buka terminal** (Command Prompt) lalu ketikkan perintah berikut:
+
+```bash
+python -m streamlit run "c:\Users\USer\Dashboard_KPI.py"
+```
+
+> [!TIP]
+> **Kenapa pakai `python -m streamlit`?**
+> Hal ini untuk menghindari pesan *error* "command not found" apabila *path* sistem Anda belum diperbarui.
+
+Setelah Anda menekan *Enter*, tunggu beberapa detik, dan sebuah tab baru akan otomatis terbuka di *browser* Anda (biasanya di alamat `http://localhost:8501`).
+
+---
+
+## 💡 Fitur Dashboard Anda
+
+Di dalam dashboard tersebut, Anda akan menemukan 3 elemen visual utama:
+
+1. **Score Cards (Kartu Metrik Raksasa)**:
+   Berada di bagian paling atas. Menampilkan rangkuman seperti Total Nilai Rapor (contohnya `4.00 / 5.00`), jumlah program yang terdeteksi, dan persentase retensi pengurus.
+2. **Tabel Data Interaktif**:
+   Di bagian tengah, data dari *Google Sheets* ditampilkan dalam bentuk tabel elegan. Anda dapat memperbesar tabel, menyortir urutan berdasarkan abjad/skor, hingga melakukan pencarian.
+3. **Grafik Batang (Bar Chart)**:
+   Di bagian paling bawah, terdapat visualisasi grafik batang yang membandingkan seberapa tinggi "Nilai Akhir" dari masing-masing program kerja secara langsung.
+
+> [!IMPORTANT]
+> **Pembaruan Data (*Auto-Update*)**:
+> Dashboard ini sudah saya atur menggunakan `@st.cache_data(ttl=60)`. Artinya, setiap kali Anda mengubah nilai atau menambah program baru di Google Sheets, Anda tidak perlu mematikan dan menyalakan ulang perintah di terminal. Cukup tunggu **maksimal 1 menit**, lalu *refresh* (*Reload*) halaman *browser* Anda, maka grafik dan nilainya akan otomatis berubah!
