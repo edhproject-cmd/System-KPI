@@ -216,14 +216,20 @@ def render_global_view(df_clean, list_pengurus, c_main):
 def render_individual_view(df_clean, selected_pengurus, c_main):
     df_filtered = df_clean[df_clean["Nama Pengurus"] == selected_pengurus].sort_values("Tanggal")
     
-    # Ambil evaluasi terbaru
+    # Ambil evaluasi terbaru dan sebelumnya (jika ada) untuk mengukur naik/turun
     latest_eval = df_filtered.iloc[-1]
     
+    delta_str = "Evaluasi Perdana"
+    if len(df_filtered) > 1:
+        prev_eval = df_filtered.iloc[-2]
+        delta_val = latest_eval['Nilai Akhir'] - prev_eval['Nilai Akhir']
+        delta_str = f"{delta_val:+.2f} vs periode lalu"
+        
     st.markdown(f"### 📄 Rapor Kinerja: **{selected_pengurus}**")
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric(label="Skor Kinerja Terkini", value=f"{latest_eval['Nilai Akhir']:.2f} / 5.00")
+        st.metric(label="Skor Kinerja Terkini", value=f"{latest_eval['Nilai Akhir']:.2f} / 5.00", delta=delta_str)
     with col2:
         st.metric(label="Total Evaluasi", value=len(df_filtered), delta="Rekam Jejak")
     with col3:
