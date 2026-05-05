@@ -42,7 +42,7 @@ def save_config(config_data):
     with open(CONFIG_FILE, "w") as f:
         json.dump(config_data, f)
 
-@st.cache_data
+@st.cache_data(ttl=10)
 def fetch_kpi_data():
     try:
         df = pd.read_csv(CSV_URL)
