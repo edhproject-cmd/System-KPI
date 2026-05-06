@@ -134,7 +134,7 @@ def render_dashboard(config, df_raw, c_main, time_filter):
         st.image(config["logo_path"], width=80)
         
     st.markdown(f'<h1 class="premium-header">{config["title"]}</h1>', unsafe_allow_html=True)
-    st.markdown('<p style="color: #475569; font-size: 1.1rem; margin-top: -10px; margin-bottom: 30px;">Dashboard analitik HRD modern untuk pelacakan performa dari waktu ke waktu.</p>', unsafe_allow_html=True)
+    st.markdown('<p style="color: #475569; font-size: 1.1rem; margin-top: -10px; margin-bottom: 30px;">' + config.get("subtitle", "Dashboard analitik HRD modern untuk pelacakan performa dari waktu ke waktu.") + '</p>', unsafe_allow_html=True)
 
     if df_raw.empty:
         st.warning("⚠️ Data kosong atau Kolom 'Tanggal' belum ditambahkan di Google Sheets.")
@@ -173,18 +173,18 @@ def render_dashboard(config, df_raw, c_main, time_filter):
     selected_pengurus = st.sidebar.selectbox("🎯 Evaluasi Kinerja:", ["-- Papan Peringkat (Global) --"] + list_pengurus)
     
     if selected_pengurus == "-- Papan Peringkat (Global) --":
-        render_global_view(df_clean, list_pengurus, c_main)
+        render_global_view(df_clean, list_pengurus, c_main, config)
     else:
-        render_individual_view(df_clean, selected_pengurus, c_main)
+        render_individual_view(df_clean, selected_pengurus, c_main, config)
 
-def render_global_view(df_clean, list_pengurus, c_main):
+def render_global_view(df_clean, list_pengurus, c_main, config):
     # Hitung Rata-rata Skor per Pengurus selama rentang waktu
     leaderboard = df_clean.groupby("Nama Pengurus")["Nilai Akhir"].mean().reset_index()
     leaderboard["Nilai Akhir"] = leaderboard["Nilai Akhir"].round(2)
     leaderboard = leaderboard.sort_values(by="Nilai Akhir", ascending=False).reset_index(drop=True)
     leaderboard.index += 1
     
-    st.markdown("### 🏆 Peringkat Kinerja Global (Rata-rata)")
+    st.markdown(f"### 🏆 {config.get('title_global', 'Peringkat Kinerja Global (Rata-rata)')}")
     top_scorer = leaderboard.iloc[0]["Nama Pengurus"] if not leaderboard.empty else "-"
     top_score = leaderboard.iloc[0]["Nilai Akhir"] if not leaderboard.empty else 0
     
@@ -197,7 +197,7 @@ def render_global_view(df_clean, list_pengurus, c_main):
         st.metric(label="Peraih Skor Tertinggi", value=top_scorer, delta=f"{top_score:.2f} Poin")
         
     st.markdown("---")
-    st.markdown("### 🏅 Podium Top 3 Pengurus Terbaik")
+    st.markdown(f"### 🏅 {config.get('title_podium', 'Podium Top 3 Pengurus Terbaik')}")
     
     podium_col1, podium_col2, podium_col3 = st.columns(3)
     
@@ -215,14 +215,14 @@ def render_global_view(df_clean, list_pengurus, c_main):
     
     lb_col1, lb_col2 = st.columns([1, 1.2])
     with lb_col1:
-        st.markdown("##### Tabel Klasemen Akhir")
+        st.markdown(f"##### {config.get('title_table', 'Tabel Klasemen Akhir')}")
         st.dataframe(leaderboard, use_container_width=True)
     with lb_col2:
-        st.markdown("##### 📈 Tren Performa Divisi (Rata-rata Harian)")
+        st.markdown(f"##### 📈 {config.get('title_trend', 'Tren Performa Divisi (Rata-rata Harian)')}")
         trend_divisi = df_clean.groupby("Tanggal")["Nilai Akhir"].mean().reset_index()
         st.line_chart(trend_divisi.set_index("Tanggal")["Nilai Akhir"], color=c_main)
 
-def render_individual_view(df_clean, selected_pengurus, c_main):
+def render_individual_view(df_clean, selected_pengurus, c_main, config):
     df_filtered = df_clean[df_clean["Nama Pengurus"] == selected_pengurus].sort_values("Tanggal")
     
     # Ambil evaluasi terbaru dan sebelumnya (jika ada) untuk mengukur naik/turun
@@ -234,7 +234,7 @@ def render_individual_view(df_clean, selected_pengurus, c_main):
         delta_val = latest_eval['Nilai Akhir'] - prev_eval['Nilai Akhir']
         delta_str = f"{delta_val:+.2f} vs periode lalu"
         
-    st.markdown(f"### 📄 Rapor Kinerja: **{selected_pengurus}**")
+    st.markdown(f"### 📄 {config.get('title_indiv', 'Rapor Kinerja')}: **{selected_pengurus}**")
     
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -262,7 +262,15 @@ def render_settings(config):
     st.markdown("Halaman khusus untuk mengonfigurasi estetika dan identitas dasbor Anda.")
     st.markdown("---")
     
-    new_title = st.text_input("1. 🏷️ Ganti Judul Aplikasi:", value=config.get("title", ""))
+    new_title = st.text_input("1. 🏷️ Ganti Judul Utama Aplikasi:", value=config.get("title", ""))
+    
+    with st.expander("📝 Sesuaikan Teks & Sub-judul Dasbor"):
+        new_subtitle = st.text_input("Deskripsi Dasbor (Bawah Judul):", value=config.get("subtitle", "Dashboard analitik HRD modern untuk pelacakan performa dari waktu ke waktu."))
+        new_title_global = st.text_input("Sub-judul Peringkat Global:", value=config.get("title_global", "Peringkat Kinerja Global (Rata-rata)"))
+        new_title_podium = st.text_input("Sub-judul Podium Top 3:", value=config.get("title_podium", "Podium Top 3 Pengurus Terbaik"))
+        new_title_table = st.text_input("Sub-judul Tabel Klasemen:", value=config.get("title_table", "Tabel Klasemen Akhir"))
+        new_title_trend = st.text_input("Sub-judul Tren Global:", value=config.get("title_trend", "Tren Performa Divisi (Rata-rata Harian)"))
+        new_title_indiv = st.text_input("Sub-judul Rapor Individu:", value=config.get("title_indiv", "Rapor Kinerja"))
     
     tema_tersedia = list(THEME_COLORS.keys())
     idx_tema_saat_ini = tema_tersedia.index(config["theme"]) if config.get("theme") in tema_tersedia else 0
@@ -273,6 +281,12 @@ def render_settings(config):
     
     if st.button("💾 SIMPAN PENGATURAN", type="primary"):
         config["title"] = new_title
+        config["subtitle"] = new_subtitle
+        config["title_global"] = new_title_global
+        config["title_podium"] = new_title_podium
+        config["title_table"] = new_title_table
+        config["title_trend"] = new_title_trend
+        config["title_indiv"] = new_title_indiv
         config["theme"] = new_theme
         if uploaded_logo is not None:
             save_path = f"custom_logo_{uploaded_logo.name}"
