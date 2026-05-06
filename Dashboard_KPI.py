@@ -11,7 +11,7 @@ import datetime
 CONFIG_FILE = "app_config.json"
 SHEET_ID = '1q9bqDXkXY1LvE4ywWWVHc_CYqd2iDwfe9uRMcvDrZg4'
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
-EMBED_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit?rm=minimal"
+EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdAR7OKQrSrnCI2x9vJ4v4FJnrDUd_aCuSf62A8LnLCOlij4Q/viewform?embedded=true"
 
 STANDARD_KPIS = [
     "Kehadiran & Kedisiplinan", 
@@ -250,9 +250,9 @@ def render_individual_view(df_clean, selected_pengurus, c_main):
 
 def render_iframe_editor():
     st.markdown("---")
-    st.markdown("### 📝 Live Data Editor (Input & Hapus Data)")
-    st.warning("⚠️ **WAJIB**: Pastikan Kolom A adalah **Tanggal** (M/D/YYYY) dan Kolom B adalah **Nama Pengurus**! Tambahkan evaluasi baru di baris bawah setiap **2 minggu sekali**, jangan menghapus baris lama agar sejarah tetap tersimpan.")
-    components.iframe(EMBED_URL, height=450, scrolling=True)
+    st.markdown("### 📝 Formulir Evaluasi Kinerja (Input Data)")
+    st.caption("Silakan isi formulir di bawah ini untuk menambahkan data evaluasi baru. Tanggal akan terekam secara otomatis oleh sistem saat Anda menekan tombol Submit!")
+    components.iframe(EMBED_URL, height=800, scrolling=True)
 
 def render_settings(config):
     st.markdown('<h1 class="premium-header">⚙️ Panel Admin</h1>', unsafe_allow_html=True)
