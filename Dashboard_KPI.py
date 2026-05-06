@@ -11,7 +11,6 @@ import datetime
 CONFIG_FILE = "app_config.json"
 SHEET_ID = '1q9bqDXkXY1LvE4ywWWVHc_CYqd2iDwfe9uRMcvDrZg4'
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
-EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdAR7OKQrSrnCI2x9vJ4v4FJnrDUd_aCuSf62A8LnLCOlij4Q/viewform?embedded=true"
 
 STANDARD_KPIS = [
     "Kehadiran & Kedisiplinan", 
@@ -139,13 +138,11 @@ def render_dashboard(config, df_raw, c_main, time_filter):
 
     if df_raw.empty:
         st.warning("⚠️ Data kosong atau Kolom 'Tanggal' belum ditambahkan di Google Sheets.")
-        render_iframe_editor()
         return
 
     df_clean = process_dataframe(df_raw)
     if df_clean.empty:
         st.error("Gagal memproses data. Pastikan format 7 Kolom: [Tanggal] | [Nama] | [KPI 1] s/d [KPI 5]")
-        render_iframe_editor()
         return
 
     # Menerapkan Filter Waktu
@@ -168,7 +165,6 @@ def render_dashboard(config, df_raw, c_main, time_filter):
         df_clean = df_clean[df_clean["Tanggal"] >= start_date]
         if df_clean.empty:
             st.info(f"Tidak ada data evaluasi pada rentang waktu: {time_filter}.")
-            render_iframe_editor()
             return
 
     list_pengurus = df_clean["Nama Pengurus"].unique().tolist()
@@ -180,8 +176,6 @@ def render_dashboard(config, df_raw, c_main, time_filter):
         render_global_view(df_clean, list_pengurus, c_main)
     else:
         render_individual_view(df_clean, selected_pengurus, c_main)
-
-    render_iframe_editor()
 
 def render_global_view(df_clean, list_pengurus, c_main):
     # Hitung Rata-rata Skor per Pengurus selama rentang waktu
@@ -248,12 +242,6 @@ def render_individual_view(df_clean, selected_pengurus, c_main):
         chart_data = df_filtered.set_index("Tanggal")[["Nilai Akhir"]]
         st.line_chart(chart_data, color=c_main)
 
-def render_iframe_editor():
-    st.markdown("---")
-    st.markdown("### 📝 Formulir Evaluasi Kinerja (Input Data)")
-    st.caption("Silakan isi formulir di bawah ini untuk menambahkan data evaluasi baru. Tanggal akan terekam secara otomatis oleh sistem saat Anda menekan tombol Submit!")
-    components.iframe(EMBED_URL, height=800, scrolling=True)
-
 def render_settings(config):
     st.markdown('<h1 class="premium-header">⚙️ Panel Admin</h1>', unsafe_allow_html=True)
     st.markdown("Halaman khusus untuk mengonfigurasi estetika dan identitas dasbor Anda.")
@@ -307,6 +295,9 @@ def main():
                 "6 Bulan Terakhir", 
                 "1 Tahun Terakhir"
             ])
+            st.markdown("---")
+            st.markdown("### 📝 Input Data")
+            st.link_button("✍️ Isi Evaluasi Kinerja (GForm)", "https://forms.gle/fhSczw5yEhFyPeG46", use_container_width=True)
             st.markdown("---")
             if st.button("🔄 Segarkan Data", use_container_width=True, type="primary"):
                 st.cache_data.clear()
