@@ -192,7 +192,7 @@ def render_global_view(df_clean, list_pengurus, c_main, config):
     with col1:
         st.metric(label="Total Pengurus Aktif", value=len(list_pengurus))
     with col2:
-        st.metric(label="Rata-rata Skor Divisi", value=f"{leaderboard['Nilai Akhir'].mean():.2f} / 5.0")
+        st.metric(label="Rata-rata Skor Pengurus", value=f"{leaderboard['Nilai Akhir'].mean():.2f} / 5.0")
     with col3:
         st.metric(label="Peraih Skor Tertinggi", value=top_scorer, delta=f"{top_score:.2f} Poin")
         
