@@ -196,6 +196,21 @@ def render_global_view(df_clean, list_pengurus, c_main):
     with col3:
         st.metric(label="Peraih Skor Tertinggi", value=top_scorer, delta=f"{top_score:.2f} Poin")
         
+    st.markdown("---")
+    st.markdown("### 🏅 Podium Top 3 Pengurus Terbaik")
+    
+    podium_col1, podium_col2, podium_col3 = st.columns(3)
+    
+    if len(leaderboard) >= 1:
+        with podium_col1:
+            st.success(f"**🥇 Juara 1**\n### {leaderboard.iloc[0]['Nama Pengurus']}\n**Skor:** {leaderboard.iloc[0]['Nilai Akhir']:.2f}")
+    if len(leaderboard) >= 2:
+        with podium_col2:
+            st.info(f"**🥈 Juara 2**\n### {leaderboard.iloc[1]['Nama Pengurus']}\n**Skor:** {leaderboard.iloc[1]['Nilai Akhir']:.2f}")
+    if len(leaderboard) >= 3:
+        with podium_col3:
+            st.warning(f"**🥉 Juara 3**\n### {leaderboard.iloc[2]['Nama Pengurus']}\n**Skor:** {leaderboard.iloc[2]['Nilai Akhir']:.2f}")
+            
     st.markdown("<br>", unsafe_allow_html=True)
     
     lb_col1, lb_col2 = st.columns([1, 1.2])
